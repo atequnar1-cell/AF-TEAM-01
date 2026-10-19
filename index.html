@@ -44,16 +44,58 @@
   <div class="section-title">⭐ VIP پلانز</div><div class="notice" style="margin-bottom:12px">نوٹ: پلان کی رقم اور متوقع ادائیگی کی تفصیلات آپ کی فراہم کردہ فہرست کے مطابق ہیں؛ ادائیگی یا منافع کی ضمانت نہیں۔ حقیقی لین دین سے پہلے تمام قواعد اور مالی صلاحیت کی تصدیق کریں۔</div><div class="plans" id="plans"></div>
   <div class="card"><h3>🎁 روزانہ کلیم</h3><p class="muted">روزانہ کلیم فیچر تبھی فعال کریں جب اس کے انعام اور اہلیت کے اصول سرور پر محفوظ طریقے سے نافذ ہوں۔</p><button class="btn secondary" onclick="toast('روزانہ کلیم ابھی فعال نہیں۔ پہلے محفوظ سرور سائیڈ رولز بنانا ضروری ہے۔')">روزانہ کلیم</button></div>
   <div class="card"><h3>📣 سپورٹ</h3><p class="muted">WhatsApp پر ہماری سپورٹ ٹیم سے رابطہ کریں۔</p><div class="btnrow"><button class="btn secondary" onclick="openSupport()">WhatsApp سپورٹ</button><button class="btn" onclick="openChannel()">WhatsApp چینل فالو کریں</button></div></div>
+<<section id="depositPage" class="hidden">
+  <div class="section-title">💳 ڈپازٹ درخواست</div>
+  <div class="card">
+    <form id="depositForm">
+      <div class="field">
+        <label>رقم (PKR)</label>
+        <input id="depAmount" type="number" min="1" step="1" required>
+      </div>
+
+      <div class="field">
+        <label>ادائیگی کا طریقہ</label>
+        <select id="depMethod" required onchange="showJazzNumber()">
+          <option value="">منتخب کریں</option>
+          <option>JazzCash</option>
+          <option>EasyPaisa</option>
+          <option>Bank Transfer</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <!-- YAHAN NUMBER SHOW HOGA -->
+      <div id="jazzCashBox" class="hidden" style="margin:10px 0; padding:12px; border-radius:10px; background:#111827; border:1px dashed #ec4899;">
+        <p style="font-size:12px; color:#9ca3af; margin:0;">اس نمبر پر رقم بھیجیں:</p>
+        <p style="font-size:18px; font-weight:bold; color:white; margin:4px 0;">03701849710 - Ateeque Ramhan</p>
+        <p style="font-size:11px; color:#fbbf24;">JazzCash Account</p>
+        <button type="button" onclick="copyJazzNumber()" style="margin-top:6px; font-size:12px; color:#ec4899; background:none; border:1px solid #ec4899; padding:4px 10px; border-radius:6px;">📋 نمبر کاپی کریں</button>
+      </div>
+
+      <div class="field"><label>ٹرانزیکشن ID / TID</label><input id="depTid" maxlength="120" required></div>
+      <div class="field"><label>ادائیگی کی رسید (تصویر)</label><input id="depProof" type="file" accept="image/jpeg,image/png,image/webp" required></div>
+      <button class="btn" type="submit">درخواست جمع کریں</button>
+    </form>
+    <p class="muted small">رقم کی تصدیق ایڈمن کرے گا۔ صرف تصویر کی قسم اور سائز کی جانچ ہوتی ہے؛ ادائیگی کی حقیقی تصدیق الگ ضروری ہے۔</p>
+  </div>
 </section>
-<section id="depositPage" class="hidden">
-  <div class="section-title">💳 ڈپازٹ درخواست</div><div class="card"><form id="depositForm">
-    <div class="field"><label>رقم (PKR)</label><input id="depAmount" type="number" min="1" step="1" required></div>
-    <div class="field"><label>ادائیگی کا طریقہ</label><select id="depMethod" required><option value="">منتخب کریں</option><option>JazzCash</option><option>EasyPaisa</option><option>Bank Transfer</option><option>Other</option></select></div>
-    <div class="field"><label>ٹرانزیکشن ID / TID</label><input id="depTid" maxlength="120" required></div>
-    <div class="field"><label>ادائیگی کی رسید (تصویر)</label><input id="depProof" type="file" accept="image/jpeg,image/png,image/webp" required></div>
-    <button class="btn" type="submit">درخواست جمع کریں</button>
-  </form><p class="muted small">رقم کی تصدیق ایڈمن کرے گا۔ صرف تصویر کی قسم اور سائز کی جانچ ہوتی ہے؛ ادائیگی کی حقیقی تصدیق الگ ضروری ہے۔</p></div>
-</section>
+
+<script>
+function showJazzNumber() {
+  const method = document.getElementById('depMethod').value;
+  const box = document.getElementById('jazzCashBox');
+  if (method === 'JazzCash') {
+    box.classList.remove('hidden');
+  } else {
+    box.classList.add('hidden');
+  }
+}
+function copyJazzNumber() {
+  navigator.clipboard.writeText('03701849710');
+  alert('نمبر کاپی ہو گیا: 03701849710');
+}
+</script>/section>
+
 <section id="withdrawPage" class="hidden">
   <div class="section-title">🏦 رقم نکلوانے کی درخواست</div><div class="card"><form id="withdrawForm">
     <div class="field"><label>رقم (PKR)</label><input id="withAmount" type="number" min="1" step="1" required></div>
